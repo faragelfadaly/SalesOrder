@@ -1,0 +1,62 @@
+<core:View controllerName="sap.ui.demo.myFiori.view.Detail"
+	xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" 
+	>
+	<Page title="Details" showNavButton="{device>/isPhone}"
+		navButtonPress="handleNavButtonPress">
+		<ObjectHeader title="{ID}" number="{Price}" numberUnit="EUR">
+			<attributes>
+				<ObjectAttribute text="{Description}" />
+			</attributes>
+		</ObjectHeader>
+
+		<IconTabBar expanded="{device>/isNoPhone}">
+			<items>
+				<IconTabFilter icon="sap-icon://supplier">
+					<form:SimpleForm id="SupplierForm" minWidth="1024">
+						<core:Title text="Address" />
+						<Label text="Name" />
+						<Text text="{Name}" />
+						<Label text="City" />
+						<Text text="{Address/City}, {Address/ZipCode}" />
+						<Label text="Street" />
+						<Text text="{Address/Street}" />
+					</form:SimpleForm>
+				</IconTabFilter>
+				<IconTabFilter icon="sap-icon://group">
+					<form:SimpleForm id="CategoryForm" minWidth="1024">
+						<core:Title text="Address" />
+						<Label text="Name" />
+						<Text text="{Name}" />
+					</form:SimpleForm>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		
+		<Table
+		    id="table"
+			headerText="{i18n>LineItemTableHeader}"
+			items="{Supplier/Products}"
+			>
+			<columns>
+				<Column>
+					<header><Label text="Product" /></header>
+				</Column>
+				<Column
+					minScreenWidth="Tablet"
+					demandPopin="true"
+					hAlign="Center" >
+					<header><Label text="Release Date" /></header>
+				</Column>
+			</columns>
+			<ColumnListItem
+				type="Navigation"
+				press="handleLineItemPress" >
+				<cells>
+					<ObjectIdentifier title="{ID}" />
+					<Text text="{ReleaseDate}"/>
+				</cells>
+			</ColumnListItem>
+		</Table>
+	</Page>
+</core:View>
